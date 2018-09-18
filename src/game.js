@@ -61,6 +61,18 @@ module.exports = function Game() {
     return roll % 2 != 0
   };
 
+  const proceedWithCurrentPlayer = function(roll) {
+    places[currentPlayer] = places[currentPlayer] + roll;
+    if (places[currentPlayer] > 11) {
+      places[currentPlayer] = places[currentPlayer] - 12;
+    }
+    console.log(
+      players[currentPlayer] + "'s new location is " + places[currentPlayer]
+    );
+    console.log("The category is " + currentCategory());
+    askQuestion();
+  };
+
   this.rotatePlayer = function() {
     currentPlayer += 1;
     if (currentPlayer == players.length) currentPlayer = 0;
@@ -78,15 +90,7 @@ module.exports = function Game() {
           players[currentPlayer] + " is getting out of the penalty box"
         );
 
-        places[currentPlayer] = places[currentPlayer] + roll;
-        if (places[currentPlayer] > 11) {
-          places[currentPlayer] = places[currentPlayer] - 12;
-        }
-        console.log(
-          players[currentPlayer] + "'s new location is " + places[currentPlayer]
-        );
-        console.log("The category is " + currentCategory());
-        askQuestion();
+        proceedWithCurrentPlayer(roll);
       } else {
         console.log(
           players[currentPlayer] + " is not getting out of the penalty box"
@@ -94,15 +98,7 @@ module.exports = function Game() {
         isGettingOutOfPenaltyBox = false;
       }
     } else {
-      places[currentPlayer] = places[currentPlayer] + roll;
-      if (places[currentPlayer] > 11) {
-        places[currentPlayer] = places[currentPlayer] - 12;
-      }
-      console.log(
-        players[currentPlayer] + "'s new location is " + places[currentPlayer]
-      );
-      console.log("The category is " + currentCategory());
-      askQuestion();
+      proceedWithCurrentPlayer(roll);
     }
   };
 
