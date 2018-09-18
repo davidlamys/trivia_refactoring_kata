@@ -2,7 +2,6 @@ var Player = require("./player");
 
 module.exports = function Game() {
   const players = [];
-  const places = [];
   const purses = [];
   const inPenaltyBox = [];
 
@@ -19,7 +18,7 @@ module.exports = function Game() {
   };
 
   const currentCategory = function() {
-    const currentPlace = places[currentPlayerIndex]
+    const currentPlace = players[currentPlayerIndex].place
     switch (currentPlace%4) {
       case 0:
         return "Pop";
@@ -46,7 +45,6 @@ module.exports = function Game() {
   this.add = function(playerName) {
     const player = new Player(playerName);
     const playersCount = players.push(player);
-    places[playersCount - 1] = 0;
     purses[playersCount - 1] = 0;
     inPenaltyBox[playersCount - 1] = false;
 
@@ -68,12 +66,9 @@ module.exports = function Game() {
   };
 
   const proceedWithCurrentPlayer = function(roll) {
-    places[currentPlayerIndex] = places[currentPlayerIndex] + roll;
-    if (places[currentPlayerIndex] > 11) {
-      places[currentPlayerIndex] = places[currentPlayerIndex] - 12;
-    }
+    players[currentPlayerIndex].movePlayer(roll)
     console.log(
-      getCurrentPlayerName() + "'s new location is " + places[currentPlayerIndex]
+      getCurrentPlayerName() + "'s new location is " + players[currentPlayerIndex].place
     );
     console.log("The category is " + currentCategory());
     askQuestion();
