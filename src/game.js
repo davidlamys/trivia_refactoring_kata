@@ -38,14 +38,13 @@ module.exports = function Game() {
   }
 
   this.add = function(playerName) {
-    players.push(playerName);
-    const playersCount = players.length;
+    const playersCount = players.push(playerName);
     places[playersCount - 1] = 0;
     purses[playersCount - 1] = 0;
     inPenaltyBox[playersCount - 1] = false;
 
     console.log(playerName + " was added");
-    console.log("They are player number " + players.length);
+    console.log("They are player number " + playersCount);
 
     return true;
   };
