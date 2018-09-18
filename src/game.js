@@ -139,6 +139,5 @@ module.exports = function Game() {
     console.log("Question was incorrectly answered");
     console.log(players[currentPlayer] + " was sent to the penalty box");
     inPenaltyBox[currentPlayer] = true;
-    return true;
   };
 };

@@ -6,7 +6,7 @@ var Game = require("./game");
 // repeatedly generate same test cases.
 module.exports = function runGame(random) {
   random = random || Math.random;
-  var notAWinner = false;
+  var shouldContinue = true;
 
   var game = new Game();
 
@@ -18,10 +18,10 @@ module.exports = function runGame(random) {
     game.roll(Math.floor(random() * 6) + 1);
 
     if (Math.floor(random() * 10) == 7) {
-      notAWinner = game.wrongAnswer();
+      game.wrongAnswer();
     } else {
-      notAWinner = game.wasCorrectlyAnswered();
+      shouldContinue = game.wasCorrectlyAnswered();
     }
     game.rotatePlayer();
-  } while (notAWinner);
+  } while (shouldContinue);
 };
