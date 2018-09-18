@@ -1,4 +1,4 @@
-const Player = require("./player");
+var Player = require("./player");
 
 module.exports = function Game() {
   const players = [];
@@ -40,11 +40,12 @@ module.exports = function Game() {
   }
 
   const getCurrentPlayerName = function() {
-    return players[currentPlayer]
+    return players[currentPlayer].name
   }
 
   this.add = function(playerName) {
-    const playersCount = players.push(playerName);
+    const player = new Player(playerName);
+    const playersCount = players.push(player);
     places[playersCount - 1] = 0;
     purses[playersCount - 1] = 0;
     inPenaltyBox[playersCount - 1] = false;
