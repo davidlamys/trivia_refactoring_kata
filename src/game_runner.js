@@ -18,7 +18,7 @@ module.exports = function runGame(random) {
     game.roll(Math.floor(random() * 6) + 1);
 
     if (Math.floor(random() * 10) == 7) {
-      game.wrongAnswer();
+      game.wasIncorrectlyAnswered();
     } else {
       game.wasCorrectlyAnswered();
     }

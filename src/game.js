@@ -131,7 +131,7 @@ module.exports = function Game() {
     }
   };
 
-  this.wrongAnswer = function() {
+  this.wasIncorrectlyAnswered = function() {
     console.log("Question was incorrectly answered");
     console.log(players[currentPlayer] + " was sent to the penalty box");
     inPenaltyBox[currentPlayer] = true;
