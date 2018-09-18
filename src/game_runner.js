@@ -20,8 +20,9 @@ module.exports = function runGame(random) {
     if (Math.floor(random() * 10) == 7) {
       game.wrongAnswer();
     } else {
-      shouldContinue = game.wasCorrectlyAnswered();
+      game.wasCorrectlyAnswered();
     }
+    shouldContinue = game.didPlayerWin();
     game.rotatePlayer();
   } while (shouldContinue);
 };
