@@ -57,6 +57,10 @@ module.exports = function Game() {
     if (currentCategory() == "Rock") console.log(rockQuestions.shift());
   };
 
+  const canLeavePenaltyBox = function(roll) {
+    return roll % 2 != 0
+  };
+
   this.rotatePlayer = function() {
     currentPlayer += 1;
     if (currentPlayer == players.length) currentPlayer = 0;
@@ -67,7 +71,7 @@ module.exports = function Game() {
     console.log("They have rolled a " + roll);
 
     if (inPenaltyBox[currentPlayer]) {
-      if (roll % 2 != 0) {
+      if (canLeavePenaltyBox(roll)) {
         isGettingOutOfPenaltyBox = true;
 
         console.log(
