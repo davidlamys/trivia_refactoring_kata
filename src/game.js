@@ -57,7 +57,7 @@ module.exports = function Game() {
     if (currentCategory() == "Rock") console.log(rockQuestions.shift());
   };
 
-  const rotatePlayer = function() {
+  this.rotatePlayer = function() {
     currentPlayer += 1;
     if (currentPlayer == players.length) currentPlayer = 0;
   };
@@ -115,10 +115,8 @@ module.exports = function Game() {
         );
 
         const winner = didPlayerWin();
-        rotatePlayer();
         return winner;
       } else {
-        rotatePlayer();
         return true;
       }
     } else {
@@ -133,7 +131,6 @@ module.exports = function Game() {
       );
 
       const winner = didPlayerWin();
-      rotatePlayer();
       return winner;
     }
   };
@@ -142,8 +139,6 @@ module.exports = function Game() {
     console.log("Question was incorrectly answered");
     console.log(players[currentPlayer] + " was sent to the penalty box");
     inPenaltyBox[currentPlayer] = true;
-
-    rotatePlayer();
     return true;
   };
 };

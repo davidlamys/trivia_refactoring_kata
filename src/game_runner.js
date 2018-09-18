@@ -22,5 +22,6 @@ module.exports = function runGame(random) {
     } else {
       notAWinner = game.wasCorrectlyAnswered();
     }
+    game.rotatePlayer();
   } while (notAWinner);
 };
