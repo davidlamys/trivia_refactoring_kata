@@ -39,6 +39,10 @@ module.exports = function Game() {
     rockQuestions.push("Rock Question " + i);
   }
 
+  const getCurrentPlayerName = function() {
+    return players[currentPlayer]
+  }
+
   this.add = function(playerName) {
     const playersCount = players.push(playerName);
     places[playersCount - 1] = 0;
@@ -68,7 +72,7 @@ module.exports = function Game() {
       places[currentPlayer] = places[currentPlayer] - 12;
     }
     console.log(
-      players[currentPlayer] + "'s new location is " + places[currentPlayer]
+      getCurrentPlayerName() + "'s new location is " + places[currentPlayer]
     );
     console.log("The category is " + currentCategory());
     askQuestion();
@@ -80,7 +84,7 @@ module.exports = function Game() {
   };
 
   this.roll = function(roll) {
-    console.log(players[currentPlayer] + " is the current player");
+    console.log(getCurrentPlayerName() + " is the current player");
     console.log("They have rolled a " + roll);
 
     if (inPenaltyBox[currentPlayer]) {
@@ -88,13 +92,13 @@ module.exports = function Game() {
         isGettingOutOfPenaltyBox = true;
 
         console.log(
-          players[currentPlayer] + " is getting out of the penalty box"
+          getCurrentPlayerName() + " is getting out of the penalty box"
         );
 
         proceedWithCurrentPlayer(roll);
       } else {
         console.log(
-          players[currentPlayer] + " is not getting out of the penalty box"
+          getCurrentPlayerName() + " is not getting out of the penalty box"
         );
         isGettingOutOfPenaltyBox = false;
       }
@@ -111,7 +115,7 @@ module.exports = function Game() {
 
     purses[currentPlayer] += 1;
     console.log(
-      players[currentPlayer] +
+      getCurrentPlayerName() +
       " now has " +
       purses[currentPlayer] +
       " Gold Coins."
@@ -120,7 +124,7 @@ module.exports = function Game() {
 
   this.wasIncorrectlyAnswered = function() {
     console.log("Question was incorrectly answered");
-    console.log(players[currentPlayer] + " was sent to the penalty box");
+    console.log(getCurrentPlayerName() + " was sent to the penalty box");
     inPenaltyBox[currentPlayer] = true;
   };
 };
