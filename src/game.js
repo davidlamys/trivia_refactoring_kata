@@ -11,15 +11,15 @@ module.exports = function Game() {
   const sportsQuestions = [];
   const rockQuestions = [];
 
-  let currentPlayer = 0;
+  let currentPlayerIndex = 0;
   let isGettingOutOfPenaltyBox = false;
 
   this.didPlayerWin = function() {
-    return !(purses[currentPlayer] == 6);
+    return !(purses[currentPlayerIndex] == 6);
   };
 
   const currentCategory = function() {
-    const currentPlace = places[currentPlayer]
+    const currentPlace = places[currentPlayerIndex]
     switch (currentPlace%4) {
       case 0:
         return "Pop";
@@ -40,7 +40,7 @@ module.exports = function Game() {
   }
 
   const getCurrentPlayerName = function() {
-    return players[currentPlayer].name
+    return players[currentPlayerIndex].name
   }
 
   this.add = function(playerName) {
@@ -68,27 +68,27 @@ module.exports = function Game() {
   };
 
   const proceedWithCurrentPlayer = function(roll) {
-    places[currentPlayer] = places[currentPlayer] + roll;
-    if (places[currentPlayer] > 11) {
-      places[currentPlayer] = places[currentPlayer] - 12;
+    places[currentPlayerIndex] = places[currentPlayerIndex] + roll;
+    if (places[currentPlayerIndex] > 11) {
+      places[currentPlayerIndex] = places[currentPlayerIndex] - 12;
     }
     console.log(
-      getCurrentPlayerName() + "'s new location is " + places[currentPlayer]
+      getCurrentPlayerName() + "'s new location is " + places[currentPlayerIndex]
     );
     console.log("The category is " + currentCategory());
     askQuestion();
   };
 
   this.rotatePlayer = function() {
-    currentPlayer += 1;
-    if (currentPlayer == players.length) currentPlayer = 0;
+    currentPlayerIndex += 1;
+    if (currentPlayerIndex == players.length) currentPlayerIndex = 0;
   };
 
   this.roll = function(roll) {
     console.log(getCurrentPlayerName() + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (inPenaltyBox[currentPlayer]) {
+    if (inPenaltyBox[currentPlayerIndex]) {
       if (canLeavePenaltyBox(roll)) {
         isGettingOutOfPenaltyBox = true;
 
@@ -109,16 +109,16 @@ module.exports = function Game() {
   };
 
   this.wasCorrectlyAnswered = function() {
-    if (inPenaltyBox[currentPlayer] && !isGettingOutOfPenaltyBox) {
+    if (inPenaltyBox[currentPlayerIndex] && !isGettingOutOfPenaltyBox) {
       return
     }
     console.log("Answer was correct!!!!");
 
-    purses[currentPlayer] += 1;
+    purses[currentPlayerIndex] += 1;
     console.log(
       getCurrentPlayerName() +
       " now has " +
-      purses[currentPlayer] +
+      purses[currentPlayerIndex] +
       " Gold Coins."
     );
   };
@@ -126,6 +126,6 @@ module.exports = function Game() {
   this.wasIncorrectlyAnswered = function() {
     console.log("Question was incorrectly answered");
     console.log(getCurrentPlayerName() + " was sent to the penalty box");
-    inPenaltyBox[currentPlayer] = true;
+    inPenaltyBox[currentPlayerIndex] = true;
   };
 };
