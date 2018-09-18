@@ -18,7 +18,7 @@ module.exports = function Game() {
   };
 
   const currentCategory = function() {
-    const currentPlace = players[currentPlayerIndex].place
+    const currentPlace = getCurrentPlayer().place
     switch (currentPlace%4) {
       case 0:
         return "Pop";
@@ -39,7 +39,11 @@ module.exports = function Game() {
   }
 
   const getCurrentPlayerName = function() {
-    return players[currentPlayerIndex].name
+    return getCurrentPlayer().name
+  }
+
+  const getCurrentPlayer = function() {
+    return players[currentPlayerIndex]
   }
 
   this.add = function(playerName) {
@@ -66,9 +70,9 @@ module.exports = function Game() {
   };
 
   const proceedWithCurrentPlayer = function(roll) {
-    players[currentPlayerIndex].movePlayer(roll)
+    getCurrentPlayer().movePlayer(roll)
     console.log(
-      getCurrentPlayerName() + "'s new location is " + players[currentPlayerIndex].place
+      getCurrentPlayerName() + "'s new location is " + getCurrentPlayer().place
     );
     console.log("The category is " + currentCategory());
     askQuestion();
