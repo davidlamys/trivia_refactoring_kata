@@ -2,8 +2,7 @@ var Player = require("./player");
 
 module.exports = function Game() {
   const players = [];
-  const inPenaltyBox = [];
-
+  
   const popQuestions = [];
   const scienceQuestions = [];
   const sportsQuestions = [];
@@ -48,7 +47,6 @@ module.exports = function Game() {
   this.add = function(playerName) {
     const player = new Player(playerName);
     const playersCount = players.push(player);
-    inPenaltyBox[playersCount - 1] = false;
 
     console.log(playerName + " was added");
     console.log("They are player number " + playersCount);
@@ -85,7 +83,7 @@ module.exports = function Game() {
     console.log(getCurrentPlayerName() + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (inPenaltyBox[currentPlayerIndex]) {
+    if (getCurrentPlayer().isInPenaltyBox) {
       if (canLeavePenaltyBox(roll)) {
         isGettingOutOfPenaltyBox = true;
 
@@ -106,7 +104,7 @@ module.exports = function Game() {
   };
 
   this.wasCorrectlyAnswered = function() {
-    if (inPenaltyBox[currentPlayerIndex] && !isGettingOutOfPenaltyBox) {
+    if (getCurrentPlayer().isInPenaltyBox && !isGettingOutOfPenaltyBox) {
       return
     }
     console.log("Answer was correct!!!!");
@@ -123,6 +121,6 @@ module.exports = function Game() {
   this.wasIncorrectlyAnswered = function() {
     console.log("Question was incorrectly answered");
     console.log(getCurrentPlayerName() + " was sent to the penalty box");
-    inPenaltyBox[currentPlayerIndex] = true;
+    getCurrentPlayer().isInPenaltyBox = true;
   };
 };
