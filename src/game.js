@@ -57,6 +57,11 @@ module.exports = function Game() {
     if (currentCategory() == "Rock") console.log(rockQuestions.shift());
   };
 
+  const rotatePlayer = function() {
+    currentPlayer += 1;
+    if (currentPlayer == players.length) currentPlayer = 0;
+  };
+
   this.roll = function(roll) {
     console.log(players[currentPlayer] + " is the current player");
     console.log("They have rolled a " + roll);
@@ -68,11 +73,11 @@ module.exports = function Game() {
         console.log(
           players[currentPlayer] + " is getting out of the penalty box"
         );
+
         places[currentPlayer] = places[currentPlayer] + roll;
         if (places[currentPlayer] > 11) {
           places[currentPlayer] = places[currentPlayer] - 12;
         }
-
         console.log(
           players[currentPlayer] + "'s new location is " + places[currentPlayer]
         );
@@ -89,7 +94,6 @@ module.exports = function Game() {
       if (places[currentPlayer] > 11) {
         places[currentPlayer] = places[currentPlayer] - 12;
       }
-
       console.log(
         players[currentPlayer] + "'s new location is " + places[currentPlayer]
       );
@@ -111,13 +115,10 @@ module.exports = function Game() {
         );
 
         const winner = didPlayerWin();
-        currentPlayer += 1;
-        if (currentPlayer == players.length) currentPlayer = 0;
-
+        rotatePlayer();
         return winner;
       } else {
-        currentPlayer += 1;
-        if (currentPlayer == players.length) currentPlayer = 0;
+        rotatePlayer();
         return true;
       }
     } else {
@@ -132,10 +133,7 @@ module.exports = function Game() {
       );
 
       const winner = didPlayerWin();
-
-      currentPlayer += 1;
-      if (currentPlayer == players.length) currentPlayer = 0;
-
+      rotatePlayer();
       return winner;
     }
   };
@@ -145,8 +143,7 @@ module.exports = function Game() {
     console.log(players[currentPlayer] + " was sent to the penalty box");
     inPenaltyBox[currentPlayer] = true;
 
-    currentPlayer += 1;
-    if (currentPlayer == players.length) currentPlayer = 0;
+    rotatePlayer();
     return true;
   };
 };
