@@ -103,32 +103,18 @@ module.exports = function Game() {
   };
 
   this.wasCorrectlyAnswered = function() {
-    if (inPenaltyBox[currentPlayer]) {
-      if (isGettingOutOfPenaltyBox) {
-        console.log("Answer was correct!!!!");
-        purses[currentPlayer] += 1;
-        console.log(
-          players[currentPlayer] +
-            " now has " +
-            purses[currentPlayer] +
-            " Gold Coins."
-        );
-        return
-      } else {
-        return
-      }
-    } else {
-      console.log("Answer was correct!!!!");
-
-      purses[currentPlayer] += 1;
-      console.log(
-        players[currentPlayer] +
-          " now has " +
-          purses[currentPlayer] +
-          " Gold Coins."
-      );
+    if (inPenaltyBox[currentPlayer] && !isGettingOutOfPenaltyBox) {
       return
     }
+    console.log("Answer was correct!!!!");
+
+    purses[currentPlayer] += 1;
+    console.log(
+      players[currentPlayer] +
+      " now has " +
+      purses[currentPlayer] +
+      " Gold Coins."
+    );
   };
 
   this.wasIncorrectlyAnswered = function() {
