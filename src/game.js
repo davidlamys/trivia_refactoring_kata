@@ -2,14 +2,13 @@ var Player = require("./player");
 
 module.exports = function Game() {
   const players = [];
-  
+
   const popQuestions = [];
   const scienceQuestions = [];
   const sportsQuestions = [];
   const rockQuestions = [];
 
   let currentPlayerIndex = 0;
-  let isGettingOutOfPenaltyBox = false;
 
   this.didPlayerWin = function() {
     return !(getCurrentPlayer().purse == 6);
@@ -85,7 +84,7 @@ module.exports = function Game() {
 
     if (getCurrentPlayer().isInPenaltyBox) {
       if (canLeavePenaltyBox(roll)) {
-        isGettingOutOfPenaltyBox = true;
+        getCurrentPlayer().canProceed = true;
 
         console.log(
           getCurrentPlayerName() + " is getting out of the penalty box"
@@ -96,7 +95,7 @@ module.exports = function Game() {
         console.log(
           getCurrentPlayerName() + " is not getting out of the penalty box"
         );
-        isGettingOutOfPenaltyBox = false;
+        getCurrentPlayer().canProceed = false;
       }
     } else {
       proceedWithCurrentPlayer(roll);
@@ -104,7 +103,7 @@ module.exports = function Game() {
   };
 
   this.wasCorrectlyAnswered = function() {
-    if (getCurrentPlayer().isInPenaltyBox && !isGettingOutOfPenaltyBox) {
+    if (getCurrentPlayer().canProceed == false) {
       return
     }
     console.log("Answer was correct!!!!");

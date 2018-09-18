@@ -3,6 +3,7 @@ module.exports = function Player(name) {
   this.place = 0;
   this.purse = 0;
   this.isInPenaltyBox = false;
+  this.canProceed = true;
 
   this.movePlayer = function(roll) {
     this.place += roll;
