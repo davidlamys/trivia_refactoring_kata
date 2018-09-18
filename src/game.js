@@ -1,3 +1,5 @@
+const Player = require("./player");
+
 module.exports = function Game() {
   const players = new Array();
   const places = new Array(6);
