@@ -2,7 +2,6 @@ var Player = require("./player");
 
 module.exports = function Game() {
   const players = [];
-  const purses = [];
   const inPenaltyBox = [];
 
   const popQuestions = [];
@@ -14,7 +13,7 @@ module.exports = function Game() {
   let isGettingOutOfPenaltyBox = false;
 
   this.didPlayerWin = function() {
-    return !(purses[currentPlayerIndex] == 6);
+    return !(getCurrentPlayer().purse == 6);
   };
 
   const currentCategory = function() {
@@ -49,7 +48,6 @@ module.exports = function Game() {
   this.add = function(playerName) {
     const player = new Player(playerName);
     const playersCount = players.push(player);
-    purses[playersCount - 1] = 0;
     inPenaltyBox[playersCount - 1] = false;
 
     console.log(playerName + " was added");
@@ -113,11 +111,11 @@ module.exports = function Game() {
     }
     console.log("Answer was correct!!!!");
 
-    purses[currentPlayerIndex] += 1;
+    getCurrentPlayer().incrementPurse();
     console.log(
       getCurrentPlayerName() +
       " now has " +
-      purses[currentPlayerIndex] +
+      getCurrentPlayer().purse +
       " Gold Coins."
     );
   };
