@@ -1,15 +1,15 @@
 const Player = require("./player");
 
 module.exports = function Game() {
-  const players = new Array();
-  const places = new Array(6);
-  const purses = new Array(6);
-  const inPenaltyBox = new Array(6);
+  const players = [];
+  const places = [];
+  const purses = [];
+  const inPenaltyBox = [];
 
-  const popQuestions = new Array();
-  const scienceQuestions = new Array();
-  const sportsQuestions = new Array();
-  const rockQuestions = new Array();
+  const popQuestions = [];
+  const scienceQuestions = [];
+  const sportsQuestions = [];
+  const rockQuestions = [];
 
   let currentPlayer = 0;
   let isGettingOutOfPenaltyBox = false;
