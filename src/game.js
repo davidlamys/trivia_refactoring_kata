@@ -51,23 +51,18 @@ module.exports = function Game() {
     console.log(currentPlayer.name + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (currentPlayer.isInPenaltyBox) {
-      if (canLeavePenaltyBox(roll)) {
-        currentPlayer.canProceed = true;
-
-        console.log(
-          currentPlayer.name + " is getting out of the penalty box"
-        );
-
-        proceedWithCurrentPlayer(currentPlayer, roll);
-      } else {
-        console.log(
-          currentPlayer.name + " is not getting out of the penalty box"
-        );
-        currentPlayer.canProceed = false;
-      }
-    } else {
+    if (currentPlayer.isInPenaltyBox == false) {
       proceedWithCurrentPlayer(currentPlayer, roll);
+      return
+    }
+    
+    if (canLeavePenaltyBox(roll)) {
+      currentPlayer.canProceed = true;
+      console.log(currentPlayer.name + " is getting out of the penalty box");
+      proceedWithCurrentPlayer(currentPlayer, roll);
+    } else {
+      currentPlayer.canProceed = false;
+      console.log(currentPlayer.name + " is not getting out of the penalty box");
     }
   };
 
@@ -76,7 +71,7 @@ module.exports = function Game() {
     if (currentPlayer.canProceed == false) {
       return
     }
-    
+
     console.log("Answer was correct!!!!");
     currentPlayer.incrementPurse();
     console.log(
