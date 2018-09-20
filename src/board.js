@@ -11,4 +11,17 @@ module.exports = function Board() {
     rockQuestions.push("Rock Question " + i);
   }
 
+  this.getCategory = function(currentPlace) {
+    switch (currentPlace%4) {
+      case 0:
+        return "Pop";
+      case 1:
+        return "Science";
+      case 2:
+        return "Sports";
+      case 3:
+        return "Rock";
+    }
+  };
+
 };
