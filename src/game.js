@@ -3,11 +3,6 @@ var Board = require("./board");
 
 module.exports = function Game() {
   const players = [];
-
-  const popQuestions = [];
-  const scienceQuestions = [];
-  const sportsQuestions = [];
-  const rockQuestions = [];
   const board = new Board();
 
   let currentPlayerIndex = 0;
@@ -19,13 +14,6 @@ module.exports = function Game() {
   const currentCategory = function() {
     return board.getCategory(getCurrentPlayer().place);
   };
-
-  for (var i = 0; i < 50; i++) {
-    popQuestions.push("Pop Question " + i);
-    scienceQuestions.push("Science Question " + i);
-    sportsQuestions.push("Sports Question " + i);
-    rockQuestions.push("Rock Question " + i);
-  }
 
   const getCurrentPlayerName = function() {
     return getCurrentPlayer().name
