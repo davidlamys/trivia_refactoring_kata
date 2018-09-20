@@ -11,10 +11,6 @@ module.exports = function Game() {
     return !(getCurrentPlayer().purse == 6);
   };
 
-  const currentCategory = function() {
-    return board.getCategory(getCurrentPlayer().place);
-  };
-
   const getCurrentPlayerName = function() {
     return getCurrentPlayer().name
   }
@@ -33,11 +29,6 @@ module.exports = function Game() {
     return true;
   };
 
-  const askQuestion = function() {
-    const question = board.getQuestion(getCurrentPlayer().place);
-    console.log(question);
-  };
-
   const canLeavePenaltyBox = function(roll) {
     return roll % 2 != 0
   };
@@ -47,8 +38,10 @@ module.exports = function Game() {
     console.log(
       getCurrentPlayerName() + "'s new location is " + getCurrentPlayer().place
     );
-    console.log("The category is " + currentCategory());
-    askQuestion();
+    const currentCategory = board.getCategory(getCurrentPlayer().place);
+    console.log("The category is " + currentCategory);
+    const question = board.getQuestion(getCurrentPlayer().place);
+    console.log(question);
   };
 
   this.rotatePlayer = function() {
