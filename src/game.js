@@ -1,4 +1,5 @@
 var Player = require("./player");
+var Board = require("./board");
 
 module.exports = function Game() {
   const players = [];
