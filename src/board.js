@@ -25,7 +25,7 @@ module.exports = function Board() {
   };
 
   this.getQuestion = function(currentPlace) {
-    const currentCategory = this.getCategory(currentPlace);
+      const currentCategory = this.getCategory(currentPlace);
       if (currentCategory == "Pop") return (popQuestions.shift());
       if (currentCategory == "Science") return (scienceQuestions.shift());
       if (currentCategory == "Sports") return (sportsQuestions.shift());

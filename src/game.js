@@ -8,6 +8,7 @@ module.exports = function Game() {
   const scienceQuestions = [];
   const sportsQuestions = [];
   const rockQuestions = [];
+  const board = new Board();
 
   let currentPlayerIndex = 0;
 
@@ -16,17 +17,7 @@ module.exports = function Game() {
   };
 
   const currentCategory = function() {
-    const currentPlace = getCurrentPlayer().place
-    switch (currentPlace%4) {
-      case 0:
-        return "Pop";
-      case 1:
-        return "Science";
-      case 2:
-        return "Sports";
-      case 3:
-        return "Rock";
-    }
+    return board.getCategory(getCurrentPlayer().place);
   };
 
   for (var i = 0; i < 50; i++) {
@@ -55,10 +46,8 @@ module.exports = function Game() {
   };
 
   const askQuestion = function() {
-    if (currentCategory() == "Pop") console.log(popQuestions.shift());
-    if (currentCategory() == "Science") console.log(scienceQuestions.shift());
-    if (currentCategory() == "Sports") console.log(sportsQuestions.shift());
-    if (currentCategory() == "Rock") console.log(rockQuestions.shift());
+    const question = board.getQuestion(getCurrentPlayer().place);
+    console.log(question);
   };
 
   const canLeavePenaltyBox = function(roll) {
