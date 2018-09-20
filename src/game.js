@@ -55,7 +55,7 @@ module.exports = function Game() {
       proceedWithCurrentPlayer(currentPlayer, roll);
       return
     }
-    
+
     if (canLeavePenaltyBox(roll)) {
       currentPlayer.canProceed = true;
       console.log(currentPlayer.name + " is getting out of the penalty box");
@@ -72,20 +72,17 @@ module.exports = function Game() {
       return
     }
 
-    console.log("Answer was correct!!!!");
     currentPlayer.incrementPurse();
-    console.log(
-      currentPlayer.name +
-      " now has " +
-      currentPlayer.purse +
-      " Gold Coins."
-    );
+    const name = currentPlayer.name;
+    const coins = currentPlayer.purse;
+    console.log("Answer was correct!!!!");
+    console.log(`${name} now has ${coins} Gold Coins.`);
   };
 
   this.wasIncorrectlyAnswered = function() {
     const currentPlayer = getCurrentPlayer();
+    currentPlayer.isInPenaltyBox = true;
     console.log("Question was incorrectly answered");
     console.log(currentPlayer.name + " was sent to the penalty box");
-    currentPlayer.isInPenaltyBox = true;
   };
 };
