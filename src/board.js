@@ -4,11 +4,15 @@ module.exports = function Board() {
   const sportsQuestions = [];
   const rockQuestions = [];
 
+  const generateQuestion = function(category, index) {
+    return category + " Question " + index
+  }
+
   for (var i = 0; i < 50; i++) {
-    popQuestions.push("Pop Question " + i);
-    scienceQuestions.push("Science Question " + i);
-    sportsQuestions.push("Sports Question " + i);
-    rockQuestions.push("Rock Question " + i);
+    popQuestions.push(generateQuestion("Pop", i));
+    scienceQuestions.push(generateQuestion("Science", i));
+    sportsQuestions.push(generateQuestion("Sports", i));
+    rockQuestions.push(generateQuestion("Rock", i));
   }
 
   this.getCategory = function(currentPlace) {
