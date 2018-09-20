@@ -22,7 +22,7 @@ module.exports = function runGame(random) {
     } else {
       game.wasCorrectlyAnswered();
     }
-    shouldContinue = game.didPlayerWin();
+    shouldContinue = game.shouldContinue();
     game.rotatePlayer();
   } while (shouldContinue);
 };

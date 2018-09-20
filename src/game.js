@@ -7,8 +7,8 @@ module.exports = function Game() {
 
   let currentPlayerIndex = 0;
 
-  this.didPlayerWin = function() {
-    return !(getCurrentPlayer().purse == 6);
+  this.shouldContinue = function() {
+    return getCurrentPlayer().purse != 6;
   };
 
   const getCurrentPlayer = function() {
