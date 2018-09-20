@@ -11,10 +11,6 @@ module.exports = function Game() {
     return !(getCurrentPlayer().purse == 6);
   };
 
-  const getCurrentPlayerName = function() {
-    return getCurrentPlayer().name
-  }
-
   const getCurrentPlayer = function() {
     return players[currentPlayerIndex]
   }
@@ -33,14 +29,14 @@ module.exports = function Game() {
     return roll % 2 != 0
   };
 
-  const proceedWithCurrentPlayer = function(roll) {
-    getCurrentPlayer().movePlayer(roll)
-    console.log(
-      getCurrentPlayerName() + "'s new location is " + getCurrentPlayer().place
-    );
-    const currentCategory = board.getCategory(getCurrentPlayer().place);
+  const proceedWithCurrentPlayer = function(player, roll) {
+    player.movePlayer(roll);
+    console.log(player.name + "'s new location is " + player.place);
+
+    const currentCategory = board.getCategory(player.place);
     console.log("The category is " + currentCategory);
-    const question = board.getQuestion(getCurrentPlayer().place);
+
+    const question = board.getQuestion(player.place);
     console.log(question);
   };
 
@@ -50,47 +46,51 @@ module.exports = function Game() {
   };
 
   this.roll = function(roll) {
-    console.log(getCurrentPlayerName() + " is the current player");
+    const currentPlayer = getCurrentPlayer();
+
+    console.log(currentPlayer.name + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (getCurrentPlayer().isInPenaltyBox) {
+    if (currentPlayer.isInPenaltyBox) {
       if (canLeavePenaltyBox(roll)) {
-        getCurrentPlayer().canProceed = true;
+        currentPlayer.canProceed = true;
 
         console.log(
-          getCurrentPlayerName() + " is getting out of the penalty box"
+          currentPlayer.name + " is getting out of the penalty box"
         );
 
-        proceedWithCurrentPlayer(roll);
+        proceedWithCurrentPlayer(currentPlayer, roll);
       } else {
         console.log(
-          getCurrentPlayerName() + " is not getting out of the penalty box"
+          currentPlayer.name + " is not getting out of the penalty box"
         );
-        getCurrentPlayer().canProceed = false;
+        currentPlayer.canProceed = false;
       }
     } else {
-      proceedWithCurrentPlayer(roll);
+      proceedWithCurrentPlayer(currentPlayer, roll);
     }
   };
 
   this.wasCorrectlyAnswered = function() {
-    if (getCurrentPlayer().canProceed == false) {
+    const currentPlayer = getCurrentPlayer();
+    if (currentPlayer.canProceed == false) {
       return
     }
+    
     console.log("Answer was correct!!!!");
-
-    getCurrentPlayer().incrementPurse();
+    currentPlayer.incrementPurse();
     console.log(
-      getCurrentPlayerName() +
+      currentPlayer.name +
       " now has " +
-      getCurrentPlayer().purse +
+      currentPlayer.purse +
       " Gold Coins."
     );
   };
 
   this.wasIncorrectlyAnswered = function() {
+    const currentPlayer = getCurrentPlayer();
     console.log("Question was incorrectly answered");
-    console.log(getCurrentPlayerName() + " was sent to the penalty box");
-    getCurrentPlayer().isInPenaltyBox = true;
+    console.log(currentPlayer.name + " was sent to the penalty box");
+    currentPlayer.isInPenaltyBox = true;
   };
 };
