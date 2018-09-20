@@ -10,7 +10,7 @@ module.exports = function Board() {
   const rock = "Rock";
 
   const generateQuestion = function(category, index) {
-    return category + " Question " + index
+    return `${category} Question ${index}`
   }
 
   for (var i = 0; i < 50; i++) {

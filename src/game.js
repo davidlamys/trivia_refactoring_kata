@@ -19,8 +19,8 @@ module.exports = function Game() {
     const player = new Player(playerName);
     const playersCount = players.push(player);
 
-    console.log(playerName + " was added");
-    console.log("They are player number " + playersCount);
+    console.log(`${playerName} was added`);
+    console.log(`They are player number ${playersCount}`);
 
     return true;
   };
@@ -31,10 +31,12 @@ module.exports = function Game() {
 
   const proceedWithCurrentPlayer = function(player, roll) {
     player.movePlayer(roll);
-    console.log(player.name + "'s new location is " + player.place);
+    const name = player.name;
+    const place = player.place;
+    console.log(`${name}'s new location is ${place}`);
 
-    const currentCategory = board.getCategory(player.place);
-    console.log("The category is " + currentCategory);
+    const currentCategory = board.getCategory(place);
+    console.log(`The category is ${currentCategory}`);
 
     const question = board.getQuestion(player.place);
     console.log(question);
@@ -47,9 +49,9 @@ module.exports = function Game() {
 
   this.roll = function(roll) {
     const currentPlayer = getCurrentPlayer();
-
-    console.log(currentPlayer.name + " is the current player");
-    console.log("They have rolled a " + roll);
+    const name = currentPlayer.name;
+    console.log(`${name} is the current player`);
+    console.log(`They have rolled a ${roll}`);
 
     if (currentPlayer.isInPenaltyBox == false) {
       proceedWithCurrentPlayer(currentPlayer, roll);
@@ -58,11 +60,11 @@ module.exports = function Game() {
 
     if (canLeavePenaltyBox(roll)) {
       currentPlayer.canProceed = true;
-      console.log(currentPlayer.name + " is getting out of the penalty box");
+      console.log(`${name} is getting out of the penalty box`);
       proceedWithCurrentPlayer(currentPlayer, roll);
     } else {
       currentPlayer.canProceed = false;
-      console.log(currentPlayer.name + " is not getting out of the penalty box");
+      console.log(`${name} is not getting out of the penalty box`);
     }
   };
 
@@ -83,6 +85,6 @@ module.exports = function Game() {
     const currentPlayer = getCurrentPlayer();
     currentPlayer.isInPenaltyBox = true;
     console.log("Question was incorrectly answered");
-    console.log(currentPlayer.name + " was sent to the penalty box");
+    console.log(`${currentPlayer.name} was sent to the penalty box`);
   };
 };
